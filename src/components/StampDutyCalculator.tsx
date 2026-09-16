@@ -305,13 +305,26 @@ export const StampDutyCalculator: React.FC<StampDutyCalculatorProps> = ({ onOpen
               </div>
             </div>
 
-            <button
-              onClick={() => onOpenLeadModal({ type: 'stamp_duty', state: selectedState, propertyValue, result })}
-              className="w-full py-3.5 px-4 rounded-xl bg-[#0f1e36] hover:bg-[#0a192f] text-white font-extrabold text-sm flex items-center justify-center gap-2 transition-all shadow-md shadow-[#0f1e36]/20"
-            >
-              <span>Get Pre-Approved with a {selectedState} Broker</span>
-              <ArrowRight className="w-4 h-4 text-[#38bdf8]" />
-            </button>
+            <div className="space-y-1.5">
+              <button
+                onClick={() => onOpenLeadModal({ 
+                  type: 'stamp_duty', 
+                  state: selectedState, 
+                  propertyValue, 
+                  result,
+                  goal: result.concessionAmount > 0 
+                    ? `Claim $${result.concessionAmount.toLocaleString()} Stamp Duty Concession in ${selectedState}`
+                    : `Get Pre-Approved with Lowest Gov Fees in ${selectedState}`
+                })}
+                className="w-full py-3.5 px-4 rounded-xl bg-[#0f1e36] hover:bg-[#0a192f] text-white font-extrabold text-sm flex items-center justify-center gap-2 transition-all shadow-md shadow-[#0f1e36]/20 hover:scale-[1.01] active:scale-[0.99]"
+              >
+                <span>{result.concessionAmount > 0 ? `Claim My $${result.concessionAmount.toLocaleString()} Concession` : `Organize My ${selectedState} Home Loan`}</span>
+                <ArrowRight className="w-4 h-4 text-[#38bdf8]" />
+              </button>
+              <p className="text-[11px] text-center text-[#64748b]">
+                Free Eligibility Assessment & Government Grant Application Assistance ($0 Fee)
+              </p>
+            </div>
           </div>
         </div>
       </div>

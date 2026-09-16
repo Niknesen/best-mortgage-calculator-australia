@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import {
   X,
   CheckCircle2,
-  Sparkles,
   ArrowRight,
   Phone,
   Mail,
   User,
-  Lock
+  Lock,
+  ExternalLink,
+  Target
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -34,6 +35,8 @@ export const LeadModal: React.FC<LeadModalProps> = ({ isOpen, onClose, initialDa
 
   if (!isOpen) return null;
 
+  const currentGoal = initialData?.goal || (initialData?.lender ? `Apply for ${initialData.lender} ${initialData.rate}% Rate` : 'Get Free Broker Pre-Approval');
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -46,13 +49,19 @@ export const LeadModal: React.FC<LeadModalProps> = ({ isOpen, onClose, initialDa
         spread: 70,
         origin: { y: 0.6 },
       });
-    }, 800);
+    }, 700);
   };
 
   const handleClose = () => {
     setIsSuccess(false);
     setStep(1);
     onClose();
+  };
+
+  const handleContinueToFunnel = () => {
+    const funnelUrl = `http://localhost:8080/google-omni.html?postcode=${encodeURIComponent(postcode)}&price=${encodeURIComponent(propertyPrice)}&goal=${encodeURIComponent(currentGoal)}`;
+    window.open(funnelUrl, '_blank');
+    handleClose();
   };
 
   return (
@@ -76,9 +85,9 @@ export const LeadModal: React.FC<LeadModalProps> = ({ isOpen, onClose, initialDa
             </div>
 
             <div className="space-y-2">
-              <h3 className="text-2xl font-black font-display text-[#0f172a]">Review Request Confirmed!</h3>
+              <h3 className="text-2xl font-black font-display text-[#0f172a]">Your Scenario is Registered!</h3>
               <p className="text-sm text-[#64748b] max-w-sm mx-auto leading-relaxed">
-                An accredited MFAA broker matching your criteria in postcode <strong>{postcode}</strong> will review your scenario within 2 business hours.
+                An accredited MFAA broker matching your goal in postcode <strong>{postcode}</strong> will review your scenario within 2 business hours.
               </p>
             </div>
 
@@ -88,30 +97,43 @@ export const LeadModal: React.FC<LeadModalProps> = ({ isOpen, onClose, initialDa
                 <span className="font-bold text-[#0f172a]">{fullName}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-[#64748b]">Property Target:</span>
-                <span className="font-bold text-[#0071e3]">{propertyPrice}</span>
+                <span className="text-[#64748b]">Your Goal:</span>
+                <span className="font-bold text-[#0071e3]">{currentGoal}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-[#64748b]">Deposit:</span>
+                <span className="text-[#64748b]">Property Target:</span>
+                <span className="font-bold text-[#0f172a]">{propertyPrice}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-[#64748b]">Deposit Available:</span>
                 <span className="font-bold text-[#059669]">{depositAmount}</span>
               </div>
             </div>
 
-            <button
-              onClick={handleClose}
-              className="w-full py-3 px-4 rounded-xl bg-[#0f1e36] text-white font-bold text-sm hover:bg-[#0a192f] transition-colors"
-            >
-              Done & Return to Calculator
-            </button>
+            <div className="space-y-2 pt-2">
+              <button
+                onClick={handleContinueToFunnel}
+                className="w-full py-3.5 px-4 rounded-xl bg-[#0071e3] hover:bg-[#0077ed] text-white font-extrabold text-sm flex items-center justify-center gap-2 transition-all shadow-md shadow-[#0071e3]/25"
+              >
+                <span>Continue to Best Brokers Australia Funnel</span>
+                <ExternalLink className="w-4 h-4" />
+              </button>
+              <button
+                onClick={handleClose}
+                className="w-full py-2.5 px-4 rounded-xl text-[#64748b] hover:text-[#0f172a] font-bold text-xs"
+              >
+                Return to Calculator
+              </button>
+            </div>
           </div>
         ) : (
           <div className="p-6 sm:p-8 space-y-6">
-            {/* Header */}
-            <div className="space-y-1">
-              <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#0071e3] flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>100% Free • No Impact On Credit Score</span>
-              </span>
+            {/* Header with Customer's Selected Dream Goal */}
+            <div className="space-y-2">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#f0f9ff] border border-[#0071e3]/20 text-[#0071e3] text-[11px] font-mono font-bold">
+                <Target className="w-3.5 h-3.5 text-[#0071e3]" />
+                <span className="truncate max-w-[320px]">{currentGoal}</span>
+              </div>
               <h3 className="text-2xl font-black font-display text-[#0f172a] tracking-tight">
                 Get Pre-Approved with a Top Broker
               </h3>

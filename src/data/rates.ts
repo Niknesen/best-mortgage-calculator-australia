@@ -12,6 +12,8 @@ export interface LoanProduct {
   hasRedraw: boolean;
   minDepositPercent: number;
   highlightBadge?: string;
+  ctaText: string; // Realistic dream outcome CTA
+  goalSubtitle: string;
   enquireUrl: string;
 }
 
@@ -30,7 +32,9 @@ export const TOP_AU_LENDERS: LoanProduct[] = [
     hasRedraw: true,
     minDepositPercent: 10,
     highlightBadge: 'Lowest Variable Rate',
-    enquireUrl: '#enquire-rate'
+    ctaText: 'Unlock 5.74% Wholesale Rate',
+    goalSubtitle: 'Access direct lender discounting with a broker',
+    enquireUrl: 'http://localhost:8080/google-omni.html?lender=tiimely&rate=5.74'
   },
   {
     id: 'unloan-cba',
@@ -46,7 +50,9 @@ export const TOP_AU_LENDERS: LoanProduct[] = [
     hasRedraw: true,
     minDepositPercent: 20,
     highlightBadge: 'Annual Loyalty Discount',
-    enquireUrl: '#enquire-rate'
+    ctaText: 'Setup Annual Loyalty Discount',
+    goalSubtitle: 'CBA security with automatic annual rate reductions',
+    enquireUrl: 'http://localhost:8080/google-omni.html?lender=unloan&rate=5.79'
   },
   {
     id: 'macquarie-offset',
@@ -62,7 +68,9 @@ export const TOP_AU_LENDERS: LoanProduct[] = [
     hasRedraw: true,
     minDepositPercent: 10,
     highlightBadge: 'Best Offset Feature (10 Accounts)',
-    enquireUrl: '#enquire-rate'
+    ctaText: 'Setup 10 Offset Accounts ($0 Fee)',
+    goalSubtitle: 'Slash lifetime interest with multiple savings accounts',
+    enquireUrl: 'http://localhost:8080/google-omni.html?lender=macquarie&rate=5.84'
   },
   {
     id: 'athena-celebrate',
@@ -78,7 +86,9 @@ export const TOP_AU_LENDERS: LoanProduct[] = [
     hasRedraw: true,
     minDepositPercent: 15,
     highlightBadge: 'Automatic Rate Drop',
-    enquireUrl: '#enquire-rate'
+    ctaText: 'Activate Auto Rate Drop Loan',
+    goalSubtitle: 'Your rate drops automatically as you pay down your loan',
+    enquireUrl: 'http://localhost:8080/google-omni.html?lender=athena&rate=5.89'
   },
   {
     id: 'anz-simplicity',
@@ -94,6 +104,8 @@ export const TOP_AU_LENDERS: LoanProduct[] = [
     hasRedraw: true,
     minDepositPercent: 5,
     highlightBadge: 'Big 4 Bank Special',
-    enquireUrl: '#enquire-rate'
+    ctaText: 'Access Big 4 Bank Special Rate',
+    goalSubtitle: 'Major bank security negotiated at $0 broker fee',
+    enquireUrl: 'http://localhost:8080/google-omni.html?lender=anz&rate=6.04'
   }
 ];

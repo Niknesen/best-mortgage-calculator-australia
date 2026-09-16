@@ -241,13 +241,23 @@ export const RefinanceCalculator: React.FC<RefinanceCalculatorProps> = ({ onOpen
               </div>
             </div>
 
-            <button
-              onClick={() => onOpenLeadModal({ type: 'refinance', savings: result.monthlySavings, result })}
-              className="w-full py-3.5 px-4 rounded-xl bg-[#0f1e36] hover:bg-[#0a192f] text-white font-extrabold text-sm flex items-center justify-center gap-2 transition-all shadow-md shadow-[#0f1e36]/20"
-            >
-              <span>Get 3 Broker Quotes to Switch</span>
-              <ArrowRight className="w-4 h-4 text-[#38bdf8]" />
-            </button>
+            <div className="space-y-1.5">
+              <button
+                onClick={() => onOpenLeadModal({ 
+                  type: 'refinance', 
+                  savings: result.monthlySavings, 
+                  result,
+                  goal: `Slash home loan by $${result.monthlySavings.toLocaleString()}/mo & claim $${cashbackIncentive.toLocaleString()} cashback` 
+                })}
+                className="w-full py-3.5 px-4 rounded-xl bg-[#0f1e36] hover:bg-[#0a192f] text-white font-extrabold text-sm flex items-center justify-center gap-2 transition-all shadow-md shadow-[#0f1e36]/20 hover:scale-[1.01] active:scale-[0.99]"
+              >
+                <span>Slash My Loan by ${result.monthlySavings.toLocaleString()}/mo ($0 Switch Fee)</span>
+                <ArrowRight className="w-4 h-4 text-[#38bdf8]" />
+              </button>
+              <p className="text-[11px] text-center text-[#64748b]">
+                Save ${result.annualSavings.toLocaleString()}/year with free broker discharge & refinancing management
+              </p>
+            </div>
           </div>
         </div>
       </div>

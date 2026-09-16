@@ -1,6 +1,6 @@
 import React from 'react';
 import { TOP_AU_LENDERS } from '../data/rates';
-import { Sparkles, Check, ArrowRight } from 'lucide-react';
+import { Sparkles, Check, ArrowRight, ShieldCheck } from 'lucide-react';
 
 interface RateComparisonTableProps {
   onOpenLeadModal: (details?: any) => void;
@@ -30,10 +30,11 @@ export const RateComparisonTable: React.FC<RateComparisonTableProps> = ({ onOpen
             <p className="text-xs text-slate-400 font-mono">Owner-Occupier Principal & Interest • $600k Loan Example</p>
           </div>
           <button
-            onClick={() => onOpenLeadModal({ type: 'rate_comparison' })}
-            className="px-4 py-2.5 rounded-xl bg-[#0071e3] hover:bg-[#0077ed] text-white font-bold text-xs flex items-center gap-1.5 self-start sm:self-auto shadow-md shadow-[#0071e3]/30"
+            onClick={() => onOpenLeadModal({ type: 'rate_comparison', goal: 'negotiate_all_rates' })}
+            className="px-4 py-2.5 rounded-xl bg-[#0071e3] hover:bg-[#0077ed] text-white font-bold text-xs flex items-center gap-1.5 self-start sm:self-auto shadow-md shadow-[#0071e3]/30 transition-all hover:scale-[1.01]"
           >
-            <span>Have a Broker Negotiate For You</span>
+            <ShieldCheck className="w-4 h-4 text-[#38bdf8]" />
+            <span>Have a Broker Negotiate Wholesale Discounts ($0 Fee)</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
@@ -74,8 +75,8 @@ export const RateComparisonTable: React.FC<RateComparisonTableProps> = ({ onOpen
                 </div>
               </div>
 
-              {/* Col 3: Key Features (3 cols) */}
-              <div className="md:col-span-3 space-y-1 text-xs">
+              {/* Col 3: Key Features (2 cols) */}
+              <div className="md:col-span-2 space-y-1 text-xs">
                 {lender.features.slice(0, 2).map((feat, idx) => (
                   <div key={idx} className="flex items-center gap-1.5 text-[#334155]">
                     <Check className="w-3.5 h-3.5 text-[#059669] shrink-0" />
@@ -89,16 +90,23 @@ export const RateComparisonTable: React.FC<RateComparisonTableProps> = ({ onOpen
                 )}
               </div>
 
-              {/* Col 4: Action Button (2 cols) */}
-              <div className="md:col-span-2 flex flex-col gap-2">
+              {/* Col 4: Dream Outcome Action Button (3 cols) */}
+              <div className="md:col-span-3 flex flex-col gap-1.5">
                 <button
-                  onClick={() => onOpenLeadModal({ lender: lender.lenderName, rate: lender.interestRate })}
-                  className="w-full py-2.5 px-3 rounded-xl bg-[#0f1e36] hover:bg-[#0a192f] text-white text-xs font-bold transition-all flex items-center justify-center gap-1 shadow-sm"
+                  onClick={() => onOpenLeadModal({ 
+                    type: 'lender_application',
+                    lender: lender.lenderName, 
+                    rate: lender.interestRate,
+                    goal: lender.ctaText 
+                  })}
+                  className="w-full py-2.5 px-3 rounded-xl bg-[#0f1e36] hover:bg-[#0a192f] text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm hover:scale-[1.01] active:scale-[0.99]"
                 >
-                  <span>Enquire Now</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <span className="truncate">{lender.ctaText}</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-[#38bdf8] shrink-0" />
                 </button>
-                <span className="text-[10px] text-center text-[#94a3b8] font-mono">Min {lender.minDepositPercent}% deposit</span>
+                <p className="text-[10px] text-center text-[#64748b] leading-tight font-sans">
+                  {lender.goalSubtitle}
+                </p>
               </div>
             </div>
           ))}

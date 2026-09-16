@@ -659,7 +659,7 @@ export const HomeLoanCalculator: React.FC<HomeLoanCalculatorProps> = ({
 
             {/* Total Savings Supercharge Highlight */}
             {(loanSummary.totalInterestSaved > 0 || loanSummary.yearsSaved > 0) && (
-              <div className="p-4 rounded-2xl bg-[#f0f9ff] border border-[#0071e3]/30 space-y-2">
+              <div className="p-4 rounded-2xl bg-[#f0f9ff] border border-[#0071e3]/30 space-y-2.5">
                 <div className="flex items-center gap-2 text-[#0071e3] font-bold text-sm">
                   <Sparkles className="w-4 h-4" />
                   <span>Offset & Accelerated Supercharge!</span>
@@ -681,6 +681,19 @@ export const HomeLoanCalculator: React.FC<HomeLoanCalculatorProps> = ({
                 <p className="text-[11px] text-[#334155]">
                   Mortgage paid off by <strong className="text-[#0f172a]">{loanSummary.payoffDate}</strong> (instead of {loanSummary.originalPayoffDate}).
                 </p>
+                <button
+                  onClick={() => onOpenLeadModal({ 
+                    propertyValue, 
+                    deposit, 
+                    loanSummary, 
+                    selectedState, 
+                    goal: `Save $${Math.round(loanSummary.totalInterestSaved).toLocaleString()} with 100% Offset Account` 
+                  })}
+                  className="w-full py-2 px-3 rounded-xl bg-[#0071e3] hover:bg-[#0077ed] text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-xs"
+                >
+                  <span>Claim My ${Math.round(loanSummary.totalInterestSaved).toLocaleString()} Offset Savings</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
               </div>
             )}
 
@@ -705,13 +718,24 @@ export const HomeLoanCalculator: React.FC<HomeLoanCalculatorProps> = ({
             </div>
 
             {/* Apple Navy CTA Button */}
-            <button
-              onClick={() => onOpenLeadModal({ propertyValue, deposit, loanSummary, selectedState })}
-              className="w-full py-3.5 px-4 rounded-xl bg-[#0f1e36] hover:bg-[#0a192f] text-white font-extrabold text-sm flex items-center justify-center gap-2 transition-all shadow-md shadow-[#0f1e36]/20 hover:scale-[1.01] active:scale-[0.99]"
-            >
-              <span>Get Free Broker Rate Review in {selectedState}</span>
-              <ArrowRight className="w-4 h-4 text-[#38bdf8]" />
-            </button>
+            <div className="space-y-1.5">
+              <button
+                onClick={() => onOpenLeadModal({ 
+                  propertyValue, 
+                  deposit, 
+                  loanSummary, 
+                  selectedState,
+                  goal: `Lock in $${Math.round(loanSummary.repaymentAmount).toLocaleString()}/${repaymentFrequency === 'weekly' ? 'wk' : repaymentFrequency === 'fortnightly' ? 'fn' : 'mo'} Repayment Rate`
+                })}
+                className="w-full py-3.5 px-4 rounded-xl bg-[#0f1e36] hover:bg-[#0a192f] text-white font-extrabold text-sm flex items-center justify-center gap-2 transition-all shadow-md shadow-[#0f1e36]/20 hover:scale-[1.01] active:scale-[0.99]"
+              >
+                <span>Lock In This ${Math.round(loanSummary.repaymentAmount).toLocaleString()}/{repaymentFrequency === 'weekly' ? 'wk' : repaymentFrequency === 'fortnightly' ? 'fn' : 'mo'} Rate</span>
+                <ArrowRight className="w-4 h-4 text-[#38bdf8]" />
+              </button>
+              <p className="text-[11px] text-center text-[#64748b]">
+                Free Pre-Approval & Rate Negotiation with a Top {selectedState} Broker ($0 Fee)
+              </p>
+            </div>
           </div>
 
           {/* Principal vs Interest Donut Chart */}

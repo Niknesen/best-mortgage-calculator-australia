@@ -358,13 +358,23 @@ export const BorrowingPowerCalculator: React.FC<BorrowingPowerCalculatorProps> =
               </div>
             </div>
 
-            <button
-              onClick={() => onOpenLeadModal({ type: 'borrowing_power', capacity: result.maxBorrowingCapacity, result })}
-              className="w-full py-3.5 px-4 rounded-xl bg-[#0f1e36] hover:bg-[#0a192f] text-white font-extrabold text-sm flex items-center justify-center gap-2 transition-all shadow-md shadow-[#0f1e36]/20"
-            >
-              <span>Compare Lenders for ${result.maxBorrowingCapacity.toLocaleString()} Capacity</span>
-              <ArrowRight className="w-4 h-4 text-[#38bdf8]" />
-            </button>
+            <div className="space-y-1.5">
+              <button
+                onClick={() => onOpenLeadModal({ 
+                  type: 'borrowing_power', 
+                  capacity: result.maxBorrowingCapacity, 
+                  result,
+                  goal: `Unlock full $${result.maxBorrowingCapacity.toLocaleString()} borrowing capacity across 30+ lenders`
+                })}
+                className="w-full py-3.5 px-4 rounded-xl bg-[#0f1e36] hover:bg-[#0a192f] text-white font-extrabold text-sm flex items-center justify-center gap-2 transition-all shadow-md shadow-[#0f1e36]/20 hover:scale-[1.01] active:scale-[0.99]"
+              >
+                <span>Unlock My Full ${result.maxBorrowingCapacity.toLocaleString()} Borrowing Power</span>
+                <ArrowRight className="w-4 h-4 text-[#38bdf8]" />
+              </button>
+              <p className="text-[11px] text-center text-[#64748b]">
+                See which Australian banks approve your deposit & income with maximum borrowing capacity ($0 Fee)
+              </p>
+            </div>
           </div>
         </div>
       </div>

@@ -225,13 +225,23 @@ export const RentVsBuyCalculator: React.FC<RentVsBuyCalculatorProps> = ({ onOpen
               </div>
             </div>
 
-            <button
-              onClick={() => onOpenLeadModal({ type: 'rent_vs_buy', propertyPrice, result })}
-              className="w-full py-3.5 px-4 rounded-xl bg-[#0f1e36] hover:bg-[#0a192f] text-white font-extrabold text-sm flex items-center justify-center gap-2 transition-all shadow-md shadow-[#0f1e36]/20"
-            >
-              <span>Get Broker Pre-Approval for Buying</span>
-              <ArrowRight className="w-4 h-4 text-[#38bdf8]" />
-            </button>
+            <div className="space-y-1.5">
+              <button
+                onClick={() => onOpenLeadModal({ 
+                  type: 'rent_vs_buy', 
+                  propertyPrice, 
+                  result,
+                  goal: `Build $${Math.round(result.tenYearBuyNetWorth).toLocaleString()} property equity with first home pre-approval`
+                })}
+                className="w-full py-3.5 px-4 rounded-xl bg-[#0f1e36] hover:bg-[#0a192f] text-white font-extrabold text-sm flex items-center justify-center gap-2 transition-all shadow-md shadow-[#0f1e36]/20 hover:scale-[1.01] active:scale-[0.99]"
+              >
+                <span>Build ${Math.round(result.tenYearBuyNetWorth).toLocaleString()} Wealth — Start Buying Journey</span>
+                <ArrowRight className="w-4 h-4 text-[#38bdf8]" />
+              </button>
+              <p className="text-[11px] text-center text-[#64748b]">
+                Check 5% Deposit Home Guarantee Scheme eligibility & get pre-approved ($0 Fee)
+              </p>
+            </div>
           </div>
         </div>
       </div>
