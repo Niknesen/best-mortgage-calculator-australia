@@ -7,34 +7,32 @@ export default {
   theme: {
     extend: {
       colors: {
+        liven: {
+          green: '#5ca701',
+          greenHover: '#4e8f00',
+          greenSoft: '#edf8e1',
+          dark: '#1b2932',
+          gray: '#486d84',
+          grayLight: '#f4f7f9',
+          border: '#e6edf2',
+        },
         ink: {
-          DEFAULT: '#0f172a',
-          gray: '#334155',
+          DEFAULT: '#1b2932',
+          gray: '#486d84',
           muted: '#64748b',
           dim: '#94a3b8',
         },
         cobalt: {
-          DEFAULT: '#0071e3',
-          dark: '#0077ed',
-          soft: '#f0f9ff',
-          border: 'rgba(0, 113, 227, 0.2)',
+          DEFAULT: '#0284c7',
+          dark: '#0369a1',
+          soft: '#e0f2fe',
         },
         emerald: {
-          DEFAULT: '#059669',
-          dark: '#047857',
-          soft: '#ecfdf5',
-          border: 'rgba(5, 150, 105, 0.25)',
+          DEFAULT: '#5ca701',
+          dark: '#4e8f00',
+          soft: '#edf8e1',
+          border: 'rgba(92, 167, 1, 0.25)',
         },
-        gold: {
-          DEFAULT: '#d97706',
-          soft: '#fffbeb',
-          border: '#fde68a',
-        },
-        navy: {
-          dark: '#0a192f',
-          btn: '#0f1e36',
-          header: '#0e1626',
-        }
       },
       fontFamily: {
         sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
@@ -42,13 +40,17 @@ export default {
         mono: ['"JetBrains Mono"', 'monospace'],
       },
       boxShadow: {
-        'subtle': '0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.03)',
-        'card': '0 10px 30px -5px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04)',
+        'liven-pill': '0 14px 40px rgba(0,0,0,0.08)',
+        'liven-btn': '0 4px 16px rgba(92, 167, 1, 0.38)',
+        'liven-card': '0 18px 50px rgba(17, 41, 60, 0.08)',
+        'liven-subtle': '0 4px 20px -2px rgba(27, 41, 50, 0.05), 0 2px 6px -1px rgba(27, 41, 50, 0.03)',
       },
       borderRadius: {
-        'xl': '16px',
-        '2xl': '20px',
-        '3xl': '24px',
+        '4xl': '44px',
+        '3xl': '34px',
+        '2xl': '26px',
+        'xl': '20px',
+        'full': '9999px',
       }
     },
   },
